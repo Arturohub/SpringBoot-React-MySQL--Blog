@@ -47,32 +47,26 @@ export default function Login() {
         }
     };
     
-// Inside the loginUser function after successful login:
-const loginUser = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    try {
-        const response = await axios.post("https://arturoblog-backend-sb.onrender.com/api/auth/login", {
-            email: email,
-            password: password
-        }, { withCredentials: true });
-
-        const jwtToken = response.headers['Set-Cookie'];
-        if (jwtToken) {
+    const loginUser = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        
+        try {
+            const response = await axios.post("https://arturoblog-backend-sb.onrender.com/api/auth/login", {
+                email: email,
+                password: password
+            });
+            const decodetoken = getCookie("Arturo-token");
+            decodeJWT(decodetoken);
             dispatch(setHasToken(true));
-            navigate("/blog");
             toast.success("User logged in successfully. Enjoy the blog!");
-        } else {
-            toast.error("Failed to receive token.");
+            navigate("/blog");
+        } catch (error) {
+            toast.error(error.response.data);
+        } finally {
+            setIsLoading(false);
         }
-    } catch (error) {
-        toast.error(error.response.data);
-    } finally {
-        setIsLoading(false);
-    }
-};
-
+    };
 
     return(
         <div className="flex justify-center items-center mt-36 m-4">

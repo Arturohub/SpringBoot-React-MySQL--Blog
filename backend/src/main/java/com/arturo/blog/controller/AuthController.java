@@ -84,7 +84,13 @@ public class AuthController {
             responseBody.setUserId(optionalUser.get().getId());
         }
         
-        response.setHeader("Set-Cookie", "Arturo-token=" + jwt + "; Max-Age=" + (24 * 60 * 60) + "; Path=/; HttpOnly; Secure; SameSite=Strict");
+            
+        Cookie cookie = new Cookie("Arturo-token", jwt);
+        cookie.setMaxAge(24 * 60 * 60);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        response.addCookie(cookie);
         
         return ResponseEntity.status(HttpStatus.OK).body("User logged in successfully. Enjoy my blog!");
     }
