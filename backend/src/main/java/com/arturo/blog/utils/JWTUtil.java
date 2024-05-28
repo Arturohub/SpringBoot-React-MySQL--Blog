@@ -23,7 +23,7 @@ public class JWTUtil {
     private String secret;
 
     private Key getSigningKey(){
-  
+        System.out.println("Secret: " + secret); 
         byte[] keyBytes = Decoders.BASE64.decode(secret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
