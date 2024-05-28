@@ -72,7 +72,7 @@ public class JWTUtil {
         return Jwts.builder()
                 .setSubject(email)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 15 * 60 * 1000)) // 15 minutes expiration
+                .setExpiration(new Date(System.currentTimeMillis() + 15 * 60 * 1000)) //
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

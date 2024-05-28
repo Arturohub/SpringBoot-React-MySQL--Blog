@@ -22,6 +22,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.ContentSecurityPolicyHeaderWriter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -39,13 +40,13 @@ public class WebSecurityConfig {
         httpSecurity
             .csrf(AbstractHttpConfigurer::disable)
             .cors(c -> c.configurationSource(corsConfigurationSource()))
-            .authorizeHttpRequests(request -> request.requestMatchers("/api/auth/**").permitAll()
-            .requestMatchers("/h2-console/**").permitAll()
-            .requestMatchers("/api/blog/**").permitAll()
+            .authorizeHttpRequests(request -> request
             .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers("/api/blog/**").permitAll()
             .anyRequest().authenticated())
             .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationProvider(authenticationProvider());
+            .authenticationProvider(authenticationProvider())
+            .headers(headers -> headers.addHeaderWriter(new ContentSecurityPolicyHeaderWriter("default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self' http: data:;")));
             return httpSecurity.build();
     }
 
@@ -70,7 +71,7 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
       CorsConfiguration configuration = new CorsConfiguration();
-      configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+      configuration.setAllowedOrigins(Arrays.asList("https://arturoblog-sb.onrender.com"));
       configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
       configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
       configuration.setAllowCredentials(true);
