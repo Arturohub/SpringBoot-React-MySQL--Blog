@@ -56,8 +56,9 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody SignupRequest signupRequest){
-        if (authService.hasUserWithEmail(signupRequest.getEmail()))
-        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("User already exists!");
+        if (authService.hasUserWithEmail(signupRequest.getEmail())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists!");
+        }
         User user = authService.register(signupRequest);
         if(user == null)
             return  ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -83,11 +84,7 @@ public class AuthController {
             responseBody.setUserId(optionalUser.get().getId());
         }
         
-            
-        Cookie cookie = new Cookie("Arturo-token", jwt);
-        cookie.setMaxAge(24 * 60 * 60);
-        cookie.setPath("/"); 
-        response.addCookie(cookie);
+        response.setHeader("Set-Cookie", "Arturo-token=" + jwt + "; Max-Age=" + (24 * 60 * 60) + "; Path=/; HttpOnly; Secure; SameSite=Strict");
         
         return ResponseEntity.status(HttpStatus.OK).body("User logged in successfully. Enjoy my blog!");
     }
