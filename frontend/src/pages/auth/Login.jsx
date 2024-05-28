@@ -33,17 +33,20 @@ export default function Login() {
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
     }
-
     const decodeJWT = (token) => {
-        try {
-            const decodedToken = jwtDecode(token);
-            const userEmail = decodedToken.email;
-            dispatch(setUser({ email: userEmail }));
-        } catch (error) {
-            console.error("Error decoding JWT token:", error);
+        if (typeof token === 'string') {
+            try {
+                const decodedToken = jwtDecode(token);
+                const userEmail = decodedToken.email;
+                dispatch(setUser({ email: userEmail }));
+            } catch (error) {
+                console.error("Error decoding JWT token:", error);
+            }
+        } else {
+            console.error("Invalid token specified: must be a string");
         }
     };
-
+    
     const loginUser = async (e) => {
         e.preventDefault();
         setIsLoading(true);
