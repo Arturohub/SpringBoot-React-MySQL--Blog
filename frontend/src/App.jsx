@@ -30,7 +30,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/recoverpass" element={<ForgotPass />} />
         <Route path="/resetpass" element={<ResetPass />} />
-        <Route path="/not-found" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
     </div>

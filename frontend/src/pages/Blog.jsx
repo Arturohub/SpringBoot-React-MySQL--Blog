@@ -9,12 +9,12 @@ export default function Blog() {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [noResults, setNoResults] = useState(false); // State to track if there are no search results
+    const [noResults, setNoResults] = useState(false);
 
     const getBlogs = async () => {
         setIsLoading(true);
         try {
-            const response = await axios.get("http://localhost:8080/api/blog");
+            const response = await axios.get("https://arturoblog-backend-sb.onrender.com/api/blog");
             const sortedBlogs = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setBlogs(sortedBlogs);
             setSearchResults(sortedBlogs);
@@ -37,7 +37,7 @@ export default function Blog() {
             blog.subtitle.toLowerCase().includes(query.toLowerCase())
         );
         setSearchResults(filteredBlogs);
-        setNoResults(filteredBlogs.length === 0 && query !== ''); // Set noResults state based on search result length and query
+        setNoResults(filteredBlogs.length === 0 && query !== '');
     };
 
     return (

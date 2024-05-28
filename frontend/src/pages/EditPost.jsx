@@ -26,7 +26,7 @@ export default function EditPost() {
   const getBlog = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://localhost:8080/api/blog/${id}`);
+      const response = await axios.get(`https://arturoblog-backend-sb.onrender.com/api/blog/${id}`);
       setBlog({
         title: response.data.title,
         subtitle: response.data.subtitle,
@@ -44,7 +44,7 @@ export default function EditPost() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.put(`http://localhost:8080/api/blog/${id}`, blog);
+      const response = await axios.put(`https://arturoblog-backend-sb.onrender.com/api/blog/${id}`, blog);
       toast.success(response.data);
       setIsLoading(false);
       navigate("/blog");

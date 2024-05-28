@@ -24,7 +24,7 @@ export default function CreatePost(){
         }
 
         try {
-            const response = await axios.post("http://localhost:8080/api/blog", { title, subtitle, content, image });
+            const response = await axios.post("https://arturoblog-backend-sb.onrender.com/api/blog", { title, subtitle, content, image });
             toast.success(response.data);
             setIsLoading(false);
             navigate("/blog");

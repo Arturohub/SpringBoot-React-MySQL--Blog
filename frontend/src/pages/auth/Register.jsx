@@ -19,7 +19,7 @@ export default function Register(){
         e.preventDefault();
         setIsLoading(true);
         try {
-            const response = await axios.post("http://localhost:8080/api/auth/register", {
+            const response = await axios.post("https://arturoblog-backend-sb.onrender.com/api/auth/register", {
                 username: username,
                 email: email,
                 password: password,

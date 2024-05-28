@@ -22,7 +22,7 @@ export default function SinglePost() {
     const getBlogPost = async () => {
         try {
             setIsLoading(true);
-            const response = await axios.get(`http://localhost:8080/api/blog/${id}`);
+            const response = await axios.get(`https://arturoblog-backend-sb.onrender.com/api/blog/${id}`);
             setBlog(response.data);
             setIsLoading(false);
         } catch (error) {
@@ -54,7 +54,7 @@ export default function SinglePost() {
     
         if (result.isConfirmed) {
             try {
-                const response = await axios.delete(`http://localhost:8080/api/blog/${id}`);
+                const response = await axios.delete(`https://arturoblog-backend-sb.onrender.com/api/blog/${id}`);
                 toast.success(response.data);
                 navigate("/blog");
             } catch (error) {

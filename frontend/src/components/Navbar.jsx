@@ -13,7 +13,7 @@ export default function Navbar() {
 
     const logout = async () => {
         try {
-            await axios.post("http://localhost:8080/api/auth/logout", null, { withCredentials: true });
+            await axios.post("https://arturoblog-backend-sb.onrender.com/api/auth/logout", null, { withCredentials: true });
             dispatch(setHasToken(false));
             dispatch(setUser(''));
             document.cookie = "Arturo-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";

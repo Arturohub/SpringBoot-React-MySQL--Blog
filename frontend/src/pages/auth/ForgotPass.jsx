@@ -15,7 +15,7 @@ export default function ForgotPass(){
         e.preventDefault();
         setIsLoading(true);
         try {
-            const response = await axios.post("http://localhost:8080/api/auth/forgotpassword", { email }, { withCredentials: true });
+            const response = await axios.post("https://arturoblog-backend-sb.onrender.com/api/auth/forgotpassword", { email }, { withCredentials: true });
             if (response.status === 200) {
                 toast.success("Password reset link sent to your email");
                 navigate("/blog"); 
