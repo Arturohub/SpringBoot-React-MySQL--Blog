@@ -6,7 +6,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -19,11 +20,11 @@ import java.util.function.Function;
 @Component
 public class JWTUtil {
 
-    @Value("${secret.jwt}")
-    private String secret;
+     @Autowired
+    private Environment env;
 
     private Key getSigningKey(){
-        System.out.println("Secret: " + secret); 
+        String secret = env.getProperty("JWT_SECRET");
         byte[] keyBytes = Decoders.BASE64.decode(secret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
