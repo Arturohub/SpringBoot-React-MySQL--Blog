@@ -14,7 +14,10 @@ import ForgotPass from "./pages/auth/ForgotPass";
 import ResetPass from "./pages/auth/ResetPass";
 import axios from "axios";
 
+axios.defaults.baseURL = 'https://arturoblog-backend-sb.onrender.com';
 axios.defaults.withCredentials = true;
+axios.defaults.headers.common['Content-Type'] = 'application/json';
+axios.defaults.headers.common['Accept'] = 'application/json';
 
 function App() {
   return (

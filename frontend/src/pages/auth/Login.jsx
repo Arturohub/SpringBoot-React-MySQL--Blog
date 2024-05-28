@@ -55,6 +55,10 @@ export default function Login() {
             const response = await axios.post("https://arturoblog-backend-sb.onrender.com/api/auth/login", {
                 email: email,
                 password: password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
             });
             const decodetoken = getCookie("Arturo-token");
             decodeJWT(decodetoken);
