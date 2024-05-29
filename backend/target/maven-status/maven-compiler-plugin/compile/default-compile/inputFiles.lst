@@ -1,6 +1,5 @@
 C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\BlogApplication.java
 C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\model\User.java
-C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\model\PasswordResetRequest.java
 C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\controller\PostController.java
 C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\config\WebSecurityConfig.java
 C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\service\PostService.java
@@ -11,7 +10,6 @@ C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\b
 C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\service\AuthServiceImpl.java
 C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\controller\AuthController.java
 C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\service\UserServiceImpl.java
-C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\service\EmailService.java
 C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\model\Post.java
 C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\utils\JWTUtil.java
 C:\Users\Sacro\Desktop\Projectos Programacion\SpringBoot + React + MySQL- Blog\backend\src\main\java\com\arturo\blog\repository\UserRepository.java

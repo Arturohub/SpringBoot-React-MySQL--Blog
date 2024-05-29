@@ -1,12 +1,10 @@
 com\arturo\blog\repository\PostRepository.class
-com\arturo\blog\model\PasswordResetRequest.class
 com\arturo\blog\service\PostService.class
 com\arturo\blog\utils\JWTUtil.class
 com\arturo\blog\model\User.class
 com\arturo\blog\model\AuthResponse.class
 com\arturo\blog\controller\AuthController.class
 com\arturo\blog\service\AuthServiceImpl.class
-com\arturo\blog\service\EmailService.class
 com\arturo\blog\service\AuthService.class
 com\arturo\blog\service\UserServiceImpl.class
 com\arturo\blog\config\WebSecurityConfig.class

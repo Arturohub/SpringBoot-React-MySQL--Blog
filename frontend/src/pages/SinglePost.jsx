@@ -4,9 +4,8 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import DOMPurify from 'dompurify';
 import Swal from 'sweetalert2';
-import { useSelector, useDispatch } from 'react-redux';
-import { setHasToken } from "../redux/tokenSlice";
-import { setUser } from "../redux/userSlice";
+import { useSelector, useDispatch } from 'react-redux'; 
+import { selectUserEmail } from '../redux/authSlice';
 
 export default function SinglePost() {
     const [blog, setBlog] = useState({});
@@ -14,10 +13,8 @@ export default function SinglePost() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    
-    const userEmail = useSelector(state => state.user.email);
-    const hasToken = useSelector(state => state.token.hasToken);
-    
+    const dispatch = useDispatch();
+    const userEmail = useSelector(selectUserEmail); 
 
     const getBlogPost = async () => {
         try {
@@ -86,7 +83,7 @@ export default function SinglePost() {
                                 <h2 className="text-xl font-semibold mb-2 text-center">{blog.subtitle}</h2>
                                 <div className="text-gray-900 mb-4 text-justify leading-relaxed" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content) }}></div>
                             </div>
-                            {hasToken && userEmail ==="arturochicavilla@hotmail.com" && ( 
+                            {userEmail ==="arturochicavilla@hotmail.com" && ( 
                             <div className="lg:order-3 flex justify-end">
                                 <Link to={`/blog/editpost/${id}`} className="bg-blue-500 text-white px-4 py-2 rounded-md flex items-center ml-2">
                                     <span className="mr-2">Edit</span>

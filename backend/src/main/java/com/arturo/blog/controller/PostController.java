@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.arturo.blog.model.Post;
 import com.arturo.blog.service.PostService;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://arturoblog-sb.onrender.com")
 @RestController
 @RequestMapping("/api")
 public class PostController {

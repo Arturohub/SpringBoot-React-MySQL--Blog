@@ -13,17 +13,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arturo.blog.model.AuthRequest;
 import com.arturo.blog.model.AuthResponse;
-import com.arturo.blog.model.PasswordResetRequest;
+
 import com.arturo.blog.model.SignupRequest;
 import com.arturo.blog.model.User;
 import com.arturo.blog.repository.UserRepository;
 import com.arturo.blog.service.AuthService;
-import com.arturo.blog.service.EmailService;
 import com.arturo.blog.service.UserService;
 import com.arturo.blog.utils.JWTUtil;
 
@@ -45,8 +43,6 @@ public class AuthController {
     private final UserRepository userRepository;
 
     private final AuthenticationManager authenticationManager;
-
-    private final EmailService emailService;
 
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers() {
@@ -81,7 +77,6 @@ public class AuthController {
         AuthResponse responseBody = new AuthResponse();
         if (optionalUser.isPresent()) {
             responseBody.setJwt(jwt);
-            responseBody.setUserId(optionalUser.get().getId());
         }
         
             
@@ -106,42 +101,7 @@ public class AuthController {
     }
 
 
-    @PostMapping("/forgotpassword")
-    public ResponseEntity<String> forgotPassword(@RequestParam String email) {
-    Optional<User> optionalUser = userRepository.findByEmail(email);
-    if (!optionalUser.isPresent()) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email not found. Please, try again or register");
-    }
 
-
-    final String forgottoken = jwtUtil.generateTokenForPasswordReset(email);
-
-
-    String recoveryLink = "http://localhost:8080/api/auth/reset-password?token=" + forgottoken;
-    emailService.sendPasswordResetEmail(email, recoveryLink);
-
-    return ResponseEntity.status(HttpStatus.OK).body("Password reset link sent to your email");
-}
-
-    @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestBody PasswordResetRequest resetRequest) {
-
-    String email = jwtUtil.extractEmailFromToken(resetRequest.getToken());
-    if (email == null) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid token");
-    }
-
-    Optional<User> optionalUser = userRepository.findByEmail(email);
-    if (!optionalUser.isPresent()) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
-    }
-
-    User user = optionalUser.get();
-    user.setPassword(resetRequest.getNewPassword());
-    userRepository.save(user);
-
-    return ResponseEntity.ok("Password reset successfully");
-}
 
     
 
